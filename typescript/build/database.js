@@ -13,11 +13,9 @@ let mysqlOptions = {
 switch (process.env.CONNECT_TYPE) {
     case "SOCKET": {
         mysqlOptions.socketPath = String(process.env.SOCKET_PATH);
-        console.log(`MYSQL connection is configured to use a UNIX SOCKET.`);
         break;
     }
     case "TCP": {
-        console.log(`MYSQL connection is configured to use 'TCP'.`);
         break;
     }
     default: {
@@ -26,7 +24,6 @@ switch (process.env.CONNECT_TYPE) {
 }
 const connectionPool = mysql.createPool(mysqlOptions);
 module.exports.getPoolTunnel = async () => {
-    console.log(`Getting connection from pool...`);
     return new Promise((resolve, reject) => {
         connectionPool.getConnection((error, pipe) => {
             if (error)
@@ -37,7 +34,6 @@ module.exports.getPoolTunnel = async () => {
     });
 };
 module.exports.queryDatabase = async (sql, params, pipe) => {
-    console.log(`Querying the database...`);
     return new Promise((resolve, reject) => {
         pipe.query(sql, params, (error, result) => {
             if (error)

@@ -55,7 +55,6 @@ router.get ("/info/get/:id", async (req, res, next) => {
 
   res.end ();
 
-
 });
 
 /** update existing data */

@@ -31,12 +31,21 @@ describe ("Integration Test File | app.js", () => {
             .expect("Content-Type", /json/);
     })
 
-    it ("Can get existing user data", () => {
+    it ("Can get existing user data", async () => {
         /** auto-pass */
-        return request (app)
+        await request (app)
             .get ("/user/info/get/2024000001")
             .expect (200)
             .expect ("Content-Type", /json/)
+            .then ((result) => {
+                expect (result).toEqual (expect.objectContaining({
+                    status: 200,
+                    message: expect.any (String),
+                    data: expect.objectContaining ({
+                        application_data: expect.any (Number)
+                    })
+                }));
+            });
     })
 
     it ("Can update existing information", () => {

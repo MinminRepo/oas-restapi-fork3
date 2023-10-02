@@ -1,7 +1,7 @@
 const request = require ('supertest')
 const app = require ('../../app')
 
-describe ("Negative Actions Integration Test File | app.js", () => {
+describe ("Negative test file | app.js", () => {
 
     it ("Test file properly running", () => {
         /** auto-pass */
@@ -31,9 +31,9 @@ describe ("Negative Actions Integration Test File | app.js", () => {
     //         .expect("Content-Type", /json/);
     // })
 
-    it ("Errors out on non-existing user data", () => {
+    it ("Errors out on non-existing user data", async () => {
         /** auto-pass */
-        return request (app)
+        await request (app)
             .get ("/user/info/get/2024999999")
             .expect(404)
             .expect("Content-Type", /json/)
