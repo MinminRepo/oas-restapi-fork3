@@ -49,4 +49,3 @@ module.exports.queryDatabase = async (sql, params, pipe) => {
         });
     });
 };
-//# sourceMappingURL=database.js.map

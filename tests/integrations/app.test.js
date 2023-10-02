@@ -10,7 +10,7 @@ describe ("Integration Test File | app.js", () => {
     it ("Can register new user", () => {
         /** auto-pass */
         return request (app)
-            .post ("/user/account/new")
+            .put ("/user/account/new")
             .expect(200)
             .expect("Content-Type", /json/);
     })
@@ -18,7 +18,7 @@ describe ("Integration Test File | app.js", () => {
     it ("Can login to a user", () => {
         /** auto-pass */
         return request (app)
-            .post ("/user/account/new")
+            .post ("/user/account/login")
             .expect(200)
             .expect("Content-Type", /json/);
     })
@@ -26,7 +26,7 @@ describe ("Integration Test File | app.js", () => {
     it ("Can logout", () => {
         /** auto-pass */
         return request (app)
-            .post ("/user/account/new")
+            .post ("/user/account/logout")
             .expect(200)
             .expect("Content-Type", /json/);
     })
@@ -34,15 +34,15 @@ describe ("Integration Test File | app.js", () => {
     it ("Can get existing user data", () => {
         /** auto-pass */
         return request (app)
-            .post ("/user/account/new")
-            .expect(200)
-            .expect("Content-Type", /json/);
+            .get ("/user/info/get/2024000001")
+            .expect (200)
+            .expect ("Content-Type", /json/)
     })
 
     it ("Can update existing information", () => {
         /** auto-pass */
         return request (app)
-            .post ("/user/account/new")
+            .post ("/user/info/update")
             .expect(200)
             .expect("Content-Type", /json/);
     });
@@ -50,21 +50,21 @@ describe ("Integration Test File | app.js", () => {
     it ("Can finalize account", () => {
         /** auto-pass */
         return request (app)
-            .post ("/user/account/new")
+            .post ("/user/info/finalize")
             .expect(200)
             .expect("Content-Type", /json/);
     });
 
     it ("Can revoke user information", () => {
         return request (app)
-            .post ("/user/account/new")
+            .delete ("/user/info/revoke")
             .expect(200)
             .expect("Content-Type", /json/);
     });
 
     it ("Can upload documents", () => {
         return request (app)
-            .post ("/user/account/new")
+            .put ("/user/info/upload")
             .expect(200)
             .expect("Content-Type", /json/);
     });
