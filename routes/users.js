@@ -47,6 +47,4 @@ router.put ("/info/upload", async (req, res, end) => {
   res.status(500).json(genericReturn).end();
 });
 
-
-
 module.exports = router;
