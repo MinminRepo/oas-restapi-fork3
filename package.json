@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest --watchAll --verbose --forceExit --clearCache --detectOpenHandles",
+    "test": "jest --watchAll --verbose --forceExit --detectOpenHandles",
     "ts-compile": "clear && tsc"
   },
   "dependencies": {
