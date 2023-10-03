@@ -1,5 +1,5 @@
-require ('dotenv').config ();
-const crypt = require ('node:crypto');
+require('dotenv').config();
+const crypt = require('node:crypto');
 
 /**
  * This function will salt the initial hash from the user interface
@@ -9,10 +9,10 @@ module.exports.addSalt = (initialHash: string): string => {
     if (initialHash.length !== 64) {
         throw new Error(`Initial hash length is not equal to 64 characters, got ${initialHash.length}`);
     } else {
-        
+
         /** splits the string into two halves */
-        const left: string = initialHash.substring (0, 32);
-        const right: string = initialHash.substring (32);
+        const left: string = initialHash.substring(0, 32);
+        const right: string = initialHash.substring(32);
 
         /** return flipped string (right + left + salt) */
         return `${right}${left}${process.env.CRYPT_SALT}`;
@@ -27,13 +27,13 @@ module.exports.hashPassword = (plainTextString: string): string => {
     try {
         const hashed = crypt
             .createHash(process.env.CRYPT_HASH_ALGO)
-            .update (plainTextString)
-            .digest (process.env.CRYPT_DIGEST_MODE)
-            .toString ();
-        
+            .update(plainTextString)
+            .digest(process.env.CRYPT_DIGEST_MODE)
+            .toString();
+
         return hashed;
     } catch (err: any) {
-        throw new Error (err.message);   
+        throw new Error(err.message);
     }
 
 } 

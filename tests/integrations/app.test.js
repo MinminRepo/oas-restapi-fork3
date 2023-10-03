@@ -7,6 +7,12 @@ describe ("Integration Test File | app.js", () => {
         /** auto-pass */
     })
 
+    it ("Properly resolves favicon.ico requests", () => {
+        return request (app)
+            .get ('/favicon.ico')
+            .expect(204);
+    })
+
     it ("Can register new user", () => {
         /** auto-pass */
         return request (app)
@@ -38,13 +44,13 @@ describe ("Integration Test File | app.js", () => {
             .expect (200)
             .expect ("Content-Type", /json/)
             .then ((result) => {
-                expect (result).toEqual (expect.objectContaining({
+                expect (result.body).toMatchObject ({
                     status: 200,
                     message: expect.any (String),
-                    data: expect.objectContaining ({
-                        application_data: expect.any (Number)
+                    data: expect.objectContaining({
+                        applicant_no: expect.any (Number)
                     })
-                }));
+                });
             });
     })
 
@@ -78,4 +84,18 @@ describe ("Integration Test File | app.js", () => {
             .expect("Content-Type", /json/);
     });
 
+});
+
+/** negative test cases ==================================================== */
+describe ("Negative Cases:", () => {
+    it ("Test file properly running", () => {
+        /** auto pass */
+    })
+
+    it ("Properly responds with 404 on non-existent accounts", async () => {
+        await request (app)
+            .get ("/user/info/get/9999999999")
+            .expect (404)
+            .expect ("Content-Type", /json/);
+    })
 });
