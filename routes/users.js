@@ -33,12 +33,8 @@ router.post ("/account/logout", async (req, res, next) => {
 router.get ("/info/get/:id", async (req, res, next) => {
   
   const userId = req.params.id;
+  const result = await db.retrieve (userId);
   
-  let sql = "SELECT * FROM application_data WHERE applicant_no = ?";
-  let params = [ userId ];
-  let pipe = await db.getPoolTunnel ();
-  const result = await db.queryDatabase (sql, params, pipe);
-
   if (result.length === 0) {
     res.status (404).json({
       status: 404,

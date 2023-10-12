@@ -28,8 +28,7 @@ module.exports.peek = async (filePath: string, peekMode: Number = 0): Promise<bo
 
 }
 
-
-module.exports.read = async (filePath: string, encoding: string = 'utf8'): Promise<string> => {
+module.exports.readContent = async (filePath: string, encoding: string = 'utf8'): Promise<string> => {
 
     return new Promise(async (resolve, reject) => {
         try {
@@ -42,7 +41,7 @@ module.exports.read = async (filePath: string, encoding: string = 'utf8'): Promi
 
 }
 
-module.exports.append = async (filePath: string, data: string): Promise<boolean> => {
+module.exports.appendContent = async (filePath: string, data: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
         try {
             if (data === "") {
@@ -66,4 +65,25 @@ module.exports.move = async (srcFile: string, destPath: string): Promise<boolean
             reject(new Error(err.message));
         }
     });
+}
+
+module.exports.decodeUpload = async (filePath: string): Promise<string | Error> => {
+
+    return new Promise (async (resolve, reject) => {
+
+        const isString = typeof filePath;
+        if (isString !== 'string')
+            reject(new Error("File is not a path."));
+        else {
+            const fileParts = filePath.split (".");
+            if (fileParts.length === 1) {
+                // file has no extension
+                reject(new Error("Your file has no extension."));
+            } else {
+                resolve (fileParts[fileParts.length - 1]);
+            }
+        }
+
+    });
+
 }

@@ -26,7 +26,7 @@ module.exports.peek = async (filePath, peekMode = 0) => {
         }
     });
 };
-module.exports.read = async (filePath, encoding = 'utf8') => {
+module.exports.readContent = async (filePath, encoding = 'utf8') => {
     return new Promise(async (resolve, reject) => {
         try {
             const data = await fs.readFile(filePath, { encoding: encoding });
@@ -37,7 +37,7 @@ module.exports.read = async (filePath, encoding = 'utf8') => {
         }
     });
 };
-module.exports.append = async (filePath, data) => {
+module.exports.appendContent = async (filePath, data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (data === "") {
@@ -61,6 +61,22 @@ module.exports.move = async (srcFile, destPath) => {
         }
         catch (err) {
             reject(new Error(err.message));
+        }
+    });
+};
+module.exports.decodeUpload = async (filePath) => {
+    return new Promise(async (resolve, reject) => {
+        const isString = typeof filePath;
+        if (isString !== 'string')
+            reject(new Error("File is not a path."));
+        else {
+            const fileParts = filePath.split(".");
+            if (fileParts.length === 1) {
+                reject(new Error("Your file has no extension."));
+            }
+            else {
+                resolve(fileParts[fileParts.length - 1]);
+            }
         }
     });
 };
