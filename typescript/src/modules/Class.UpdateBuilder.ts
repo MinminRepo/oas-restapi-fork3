@@ -15,7 +15,6 @@ module.exports = class UpdateBuilder {
      */
     private targetUser: number = 0;
 
-
     /** constructor function */
     constructor(table:string) {
         this.targetTable = table;

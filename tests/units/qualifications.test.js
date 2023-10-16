@@ -1,6 +1,6 @@
 require ('dotenv').config ();
 const path = require ('path');
-const testObj = require ('../../typescript/build/qualifications');
+const testObj = require ('../../typescript/build/modules/qualifications');
 
 describe ("Applicant qualifications test file", () => {
 

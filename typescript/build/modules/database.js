@@ -1,7 +1,7 @@
 "use strict";
 require('dotenv').config();
 const mysql = require('mysql');
-const UpdateQueryBuilder = require('../../typescript/build/Class.UpdateBuilder');
+const UpdateQueryBuilder = require('./Class.UpdateBuilder');
 let mysqlOptions = {
     connectionLimit: Number(process.env.CONNECTION_LIMIT),
     host: String(process.env.HOST),

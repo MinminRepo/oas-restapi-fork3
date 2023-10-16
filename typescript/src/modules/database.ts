@@ -1,7 +1,7 @@
 /** import required modules */
 require('dotenv').config();
 const mysql = require ('mysql');
-const UpdateQueryBuilder = require ('../../typescript/build/Class.UpdateBuilder');
+const UpdateQueryBuilder = require ('./Class.UpdateBuilder');
 
 /** define the shape of the mysql connection options object */
 type dbConfigOptions = {

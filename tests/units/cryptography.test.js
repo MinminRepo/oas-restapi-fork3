@@ -1,4 +1,4 @@
-const crypt = require ('../../typescript/build/cryptography');
+const crypt = require ('../../typescript/build/modules/cryptography');
 
 describe ("cryptography.js test file", () => {
 

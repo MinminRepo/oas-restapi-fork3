@@ -1,4 +1,4 @@
-const UpdateBuilder = require ('../../typescript/build/Class.UpdateBuilder');
+const UpdateBuilder = require ('../../typescript/build/modules/Class.UpdateBuilder');
 const testObj = new UpdateBuilder ("application_data");
 
 describe ("Update Querybuilder test file", () => {

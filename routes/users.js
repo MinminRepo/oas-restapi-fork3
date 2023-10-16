@@ -7,10 +7,10 @@ const genericReturn = {
   data: {},
 };
 
-const db = require ('../typescript/build/database');
+const db = require ('../typescript/build/modules/database');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 

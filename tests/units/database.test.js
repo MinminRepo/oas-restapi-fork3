@@ -1,4 +1,4 @@
-const testObj = require ('../../typescript/build/database');
+const testObj = require ('../../typescript/build/modules/database');
 
 describe ("Database module test file", () => {
 
