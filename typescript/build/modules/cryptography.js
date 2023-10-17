@@ -1,6 +1,6 @@
 "use strict";
 require('dotenv').config();
-const crypt = require('node:crypto');
+const c = require('node:crypto');
 module.exports.addSalt = (initialHash) => {
     if (initialHash.length !== 64) {
         throw new Error(`Initial hash length is not equal to 64 characters, got ${initialHash.length}`);
@@ -13,7 +13,7 @@ module.exports.addSalt = (initialHash) => {
 };
 module.exports.hashPassword = (plainTextString) => {
     try {
-        const hashed = crypt
+        const hashed = c
             .createHash(process.env.CRYPT_HASH_ALGO)
             .update(plainTextString)
             .digest(process.env.CRYPT_DIGEST_MODE)

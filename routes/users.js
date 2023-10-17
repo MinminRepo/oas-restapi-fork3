@@ -21,7 +21,10 @@ router.put ("/account/new", async (req, res, next) => {
 
 /** login to account */
 router.post ("/account/login", async (req, res, next) => {
-  res.status(200).json(genericReturn).end();
+  
+  const { accountLogin } = require ('../typescript/build/routes/account.login');
+  accountLogin (req, res);
+
 });
 
 /** logout to account */

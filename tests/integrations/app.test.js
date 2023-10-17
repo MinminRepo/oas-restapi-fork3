@@ -1,5 +1,6 @@
 const request = require ('supertest')
 const app = require ('../../app')
+const crypto = require ('crypto');
 
 describe ("Integration Test File | app.js", () => {
 
@@ -21,13 +22,19 @@ describe ("Integration Test File | app.js", () => {
             .expect("Content-Type", /json/);
     })
 
-    it ("Can login to a user", () => {
+    it ("Authenticates a verified user", () => {
         /** auto-pass */
         return request (app)
             .post ("/user/account/login")
+            .send({
+                username: 'IMTHEPAPERCAT@GMAIL.COM',
+                password: crypto.createHash('sha256').update('1234567890').digest('hex').toString(),
+            })
             .expect(200)
             .expect("Content-Type", /json/);
     })
+
+    
 
     it ("Can logout", () => {
         /** auto-pass */
@@ -97,5 +104,17 @@ describe ("Negative Cases:", () => {
             .get ("/user/info/get/9999999999")
             .expect (404)
             .expect ("Content-Type", /json/);
+    })
+
+    it ("Disallows non-existent users from authenticating", () => {
+        /** auto-pass */
+        return request (app)
+            .post ("/user/account/login")
+            .send({
+                username: 'IDONOTEXIST@GMAIL.COM',
+                password: crypto.createHash('sha256').update('IAMABADPASSWORD').digest('hex').toString(),
+            })
+            .expect(401)
+            .expect("Content-Type", /json/);
     })
 });

@@ -59,3 +59,17 @@ module.exports.retrieve = async (id) => {
         }
     });
 };
+module.exports.verifyDBCredentials = async (username, password) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const sql = "SELECT * FROM application_data WHERE email = ? AND password = ? ;";
+            const params = [username, password];
+            const pipe = await getPoolTunnel();
+            const result = await queryDatabase(sql, params, pipe);
+            resolve(result);
+        }
+        catch (err) {
+            reject(err);
+        }
+    });
+};

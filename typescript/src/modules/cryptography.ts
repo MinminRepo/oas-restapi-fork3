@@ -1,5 +1,5 @@
 require('dotenv').config();
-const crypt = require('node:crypto');
+const c = require('node:crypto');
 
 /**
  * This function will salt the initial hash from the user interface
@@ -25,7 +25,7 @@ module.exports.addSalt = (initialHash: string): string => {
 module.exports.hashPassword = (plainTextString: string): string => {
 
     try {
-        const hashed = crypt
+        const hashed = c
             .createHash(process.env.CRYPT_HASH_ALGO)
             .update(plainTextString)
             .digest(process.env.CRYPT_DIGEST_MODE)

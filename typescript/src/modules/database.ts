@@ -111,6 +111,28 @@ module.exports.retrieve = async (id: number): Promise<object>  => {
 
 }
 
+
+module.exports.verifyDBCredentials = async (username: string, password: string): Promise <boolean|object> => {
+    
+    return new Promise (async (resolve, reject) => {
+        
+        try {
+
+            const sql = "SELECT * FROM application_data WHERE email = ? AND password = ? ;";
+            const params = [username, password];
+            const pipe = await getPoolTunnel ();
+            const result = await queryDatabase (sql, params, pipe);
+
+            resolve (result);
+
+        } catch (err: any) {
+            reject (err);
+        }
+
+    });
+
+}
+
 // module.exports.update = async (id: number, dataObj: object): Promise<true|Error> => {
 
 //     return new Promise (async (resolve, reject) => {
