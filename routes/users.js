@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const mw = require ('../typescript/build/middleware/main');
+
 const genericReturn = {
   status: 200,
   message: "Request OK",
@@ -20,7 +22,7 @@ router.put ("/account/new", async (req, res, next) => {
 });
 
 /** login to account */
-router.post ("/account/login", async (req, res, next) => {
+router.post ("/account/login", [mw.attachAccessControlHeaders], async (req, res, next) => {
   
   const { accountLogin } = require ('../typescript/build/routes/account.login');
   accountLogin (req, res);

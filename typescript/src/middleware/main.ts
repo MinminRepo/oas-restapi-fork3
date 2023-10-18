@@ -1,0 +1,1 @@
+module.exports.attachAccessControlHeaders = require ('../middleware/attachAccessControlHeaders').attachAccessControlHeaders;
